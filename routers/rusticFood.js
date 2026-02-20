@@ -4,7 +4,7 @@ const express = require('express')
 const router = express.Router();
 
 // importo i dati dei cibi rustici
-const menuRusticFood = require('./../data/posts');
+const menuRusticFood = require('../data/posts');
 
 // Rotte di CRUD
 // index
@@ -12,16 +12,16 @@ router.get('/', function (req, res) {
     //res.send('Lista dei cibi rustici');
     
     // Restituisco dati in json
-    res.json({
-        NumberMenu: menuRusticFood.length,
-        listMenuRusticFood: menuRusticFood
-    });
-
+    res.json(menuRusticFood)
+        
 });
 
 // show
 router.get('/:id', function (req, res) {
-    res.send('Dettagli dei cibi rustici ' + req.params.id);
+    //res.send('Dettagli dei cibi rustici ' + req.params.id);
+    // show per restituire ogni singola ricetta
+    const prodotto = menuRusticFood.find(food => food.id == req.params.id)
+    res.json(prodotto)
 });
 
 // store
